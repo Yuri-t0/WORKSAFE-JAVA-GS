@@ -47,7 +47,6 @@ public class Alert {
         this.createdAt = createdAt != null ? createdAt : LocalDateTime.now();
     }
 
-    // GETTERS & SETTERS
 
     public Long getId() { return id; }
 

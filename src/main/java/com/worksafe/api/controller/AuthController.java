@@ -28,7 +28,6 @@ public class AuthController {
         this.userDetailsService = userDetailsService;
     }
 
-    // ---------- DTOs internos ----------
 
     public static class AuthRequestDTO {
         private String email;
@@ -74,7 +73,6 @@ public class AuthController {
         public void setToken(String token) { this.token = token; }
     }
 
-    // ---------- Endpoints ----------
 
     @PostMapping("/register")
     public User register(@RequestBody RegisterRequestDTO dto) {

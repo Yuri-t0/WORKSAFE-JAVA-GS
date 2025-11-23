@@ -36,20 +36,17 @@ public class JwtFilter extends OncePerRequestFilter {
         String jwt = null;
         String username = null;
 
-        // Só tenta ler o token se vier "Bearer ..."
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
             try {
                 username = jwtService.extractUsername(jwt);
             } catch (Exception e) {
-                // token ruim? segue sem usuário autenticado, sem 500
                 filterChain.doFilter(request, response);
                 return;
             }
         }
 
-        // Se conseguiu pegar username e ainda não tem auth no contexto
-        if (username != null &&
+         if (username != null &&
                 SecurityContextHolder.getContext().getAuthentication() == null) {
 
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);

@@ -22,8 +22,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    // ===================== LIST USERS =====================
-    @GetMapping
+     @GetMapping
     public ResponseEntity<Page<User>> listUsers(
             @RequestParam(name = "name", required = false) String name,
             @RequestParam(name = "role", required = false) String roleParam,
@@ -31,19 +30,16 @@ public class UserController {
             @RequestParam(name = "size", defaultValue = "10") int size,
             @RequestParam(name = "sort", defaultValue = "id,asc") String sort
     ) {
-        // converte String -> enum com segurança
-        UserRole role = null;
+         UserRole role = null;
         if (roleParam != null && !roleParam.trim().isEmpty()) {
             try {
                 role = UserRole.valueOf(roleParam.toUpperCase());
             } catch (IllegalArgumentException ex) {
-                // se vier valor inválido, ignora o filtro de role
-                role = null;
+                 role = null;
             }
         }
 
-        // Quebra sort ("campo,asc")
-        String[] parts = sort.split(",");
+         String[] parts = sort.split(",");
         String sortField = parts[0];
         Sort.Direction direction = parts.length > 1
                 ? Sort.Direction.fromString(parts[1])
@@ -56,14 +52,13 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    // ===================== GET USER BY ID =====================
+
     @GetMapping("/{id}")
     public ResponseEntity<User> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getById(id));
     }
 
-    // ===================== UPDATE USER =====================
-    @PutMapping("/{id}")
+     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(
             @PathVariable Long id,
             @RequestBody User updatedUser
@@ -76,7 +71,7 @@ public class UserController {
         return ResponseEntity.ok(result);
     }
 
-    // ===================== DELETE USER =====================
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
         userService.delete(id);

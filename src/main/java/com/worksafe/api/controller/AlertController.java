@@ -30,8 +30,7 @@ public class AlertController {
         this.service = service;
     }
 
-    // DTO de requisição (criação/atualização)
-    public static class AlertRequestDTO {
+     public static class AlertRequestDTO {
         private Long userId;
         private Long workstationId;
         private AlertType type;
@@ -58,8 +57,7 @@ public class AlertController {
         public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
     }
 
-    // DTO de resposta
-    public static class AlertResponseDTO {
+     public static class AlertResponseDTO {
         private Long id;
         private Long userId;
         private Long workstationId;

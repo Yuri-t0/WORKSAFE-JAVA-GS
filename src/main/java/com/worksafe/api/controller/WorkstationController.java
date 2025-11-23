@@ -22,8 +22,7 @@ public class WorkstationController {
         this.service = service;
     }
 
-    // DTOs
-    public static class WorkstationRequestDTO {
+     public static class WorkstationRequestDTO {
         public String code;
         public String sector;
         public ErgonomicLevel ergonomicLevel;
@@ -46,8 +45,7 @@ public class WorkstationController {
         }
     }
 
-    // CREATE
-    @PostMapping
+     @PostMapping
     public ResponseEntity<WorkstationResponseDTO> create(
             @RequestBody WorkstationRequestDTO body
     ) {
@@ -64,8 +62,7 @@ public class WorkstationController {
         );
     }
 
-    // LIST (CORRIGIDO)
-    @GetMapping
+     @GetMapping
     public ResponseEntity<Page<WorkstationResponseDTO>> list(
             @RequestParam(name = "sector", required = false) String sector,
             @RequestParam(name = "level", required = false) String levelParam,
@@ -74,16 +71,14 @@ public class WorkstationController {
             @RequestParam(name = "sort", defaultValue = "id,asc") String sort
     ) {
 
-        // converte level String → enum
-        ErgonomicLevel level = null;
+         ErgonomicLevel level = null;
         if (levelParam != null && !levelParam.trim().isEmpty()) {
             try {
                 level = ErgonomicLevel.valueOf(levelParam.toUpperCase());
             } catch (Exception ignored) {}
         }
 
-        // sort
-        String[] parts = sort.split(",");
+         String[] parts = sort.split(",");
         String sortField = parts[0];
         Sort.Direction direction = parts.length > 1
                 ? Sort.Direction.fromString(parts[1])
@@ -97,16 +92,14 @@ public class WorkstationController {
         );
     }
 
-    // GET BY ID
-    @GetMapping("/{id}")
+     @GetMapping("/{id}")
     public ResponseEntity<WorkstationResponseDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(
                 new WorkstationResponseDTO(service.getById(id))
         );
     }
 
-    // UPDATE
-    @PutMapping("/{id}")
+     @PutMapping("/{id}")
     public ResponseEntity<WorkstationResponseDTO> update(
             @PathVariable Long id,
             @RequestBody WorkstationRequestDTO body
@@ -124,8 +117,7 @@ public class WorkstationController {
         );
     }
 
-    // DELETE
-    @DeleteMapping("/{id}")
+     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();

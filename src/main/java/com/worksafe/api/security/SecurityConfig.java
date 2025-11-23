@@ -41,13 +41,11 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/swagger-ui.html"
                         ).permitAll()
-                        .anyRequest().permitAll() // tudo liberado por enquanto
+                        .anyRequest().permitAll()
                 );
 
         http.authenticationProvider(authenticationProvider());
 
-        // 🔴 IMPORTANTE: por enquanto NÃO adiciona o filtro JWT
-        // http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

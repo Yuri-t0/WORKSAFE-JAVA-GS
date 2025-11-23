@@ -25,7 +25,6 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // ========= REGISTRO (usado no /auth/register) =========
     public User register(String name,
                          String email,
                          String rawPassword,
@@ -54,7 +53,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ========= LISTAGEM COM PAGINAÇÃO/FILTRO =========
     public Page<User> listUsers(String name, UserRole role, Pageable pageable) {
         boolean hasName = name != null && !name.trim().isEmpty();
         boolean hasRole = role != null;
@@ -73,14 +71,12 @@ public class UserService {
         }
     }
 
-    // ========= BUSCA POR ID =========
     public User getById(Long id) {
         return userRepository.findById(id)
                 .orElseThrow(() ->
                         new NoSuchElementException("User não encontrado: " + id));
     }
 
-    // ========= UPDATE (usado no UserController) =========
     public User update(Long id, String name, UserRole role) {
         User user = getById(id);
 
@@ -94,7 +90,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    // ========= DELETE =========
     public void delete(Long id) {
         if (!userRepository.existsById(id)) {
             throw new NoSuchElementException("User não encontrado: " + id);
@@ -102,7 +97,6 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    // ========= APOIO =========
 
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
