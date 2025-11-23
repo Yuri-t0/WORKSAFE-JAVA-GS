@@ -146,6 +146,8 @@ Push → Render builda → deploy automatizado
 
 Endpoint acessível globalmente
 
+Youtube: https://youtu.be/ruC1I1w8Sgc
+
 👨‍💻 Autores
 Yuri Ferreira
 RM: 559223
